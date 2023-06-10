@@ -14,3 +14,16 @@
   - UPDATE
 - 追加したレコードを削除する
   - DELETE
+
+## 作業備忘録
+
+### Nuget で SQLite を使えるように準備する
+
+`System.Data.SQLite.Core`をインストールする。
+
+#### 参考
+
+- SQLite の NuGet パッケージ
+  - https://elf-mission.net/programming/dot-net/sqlite-nuget-packages/
+- System.Data.SQLite との比較
+  - https://learn.microsoft.com/ja-jp/dotnet/standard/data/sqlite/compare
