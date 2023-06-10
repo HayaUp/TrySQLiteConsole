@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33529.622
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrySQLiteConsole", "TrySQLiteConsole\TrySQLiteConsole.csproj", "{C53B79CD-28BB-4AB9-9823-30BE40D7625A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DBA0EB5C-E5F6-4A15-811A-9E514BEA8D96}"
+	ProjectSection(SolutionItems) = preProject
+		READMME.md = READMME.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C53B79CD-28BB-4AB9-9823-30BE40D7625A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C53B79CD-28BB-4AB9-9823-30BE40D7625A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C53B79CD-28BB-4AB9-9823-30BE40D7625A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C53B79CD-28BB-4AB9-9823-30BE40D7625A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2AAA6A0D-F8A6-4DCE-8CA7-985DF08230BC}
+	EndGlobalSection
+EndGlobal
