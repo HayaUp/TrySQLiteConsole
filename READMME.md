@@ -34,6 +34,12 @@ using(var connection = new SQLiteConnection("Data Source=sample_database.db"))
 }
 ```
 
+### テーブルを作成する
+
+- DB Browser for SQLite
+  - https://sqlitebrowser.org/
+  - GUI で SQLite データベースファイルの中身が見られる
+
 #### 参考
 
 - SQLite の NuGet パッケージ
