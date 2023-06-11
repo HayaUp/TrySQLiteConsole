@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
 using System.IO;
+using System.Diagnostics;
 
 namespace TrySQLiteConsole
 {
@@ -13,13 +14,13 @@ namespace TrySQLiteConsole
             var sample_sqlite = new SampleSQLite(DATABASE_NAME);
             sample_sqlite.CreateDatabase(DATABASE_NAME);
 
-            var create_table_sql = @"
-CREATE TABLE IF NOT EXISTS User
-(
-    Id INTEGER NOT NULL,
-    Name TEXT NOT NULL
-);";
-            sample_sqlite.ExecuteSQL(create_table_sql);
+            var user = new User
+            {
+                Id = 1,
+                Name = "Alice",
+            };
+
+            sample_sqlite.Insert(user.InsertSQL);
 
             Console.ReadLine();
         }
@@ -58,28 +59,78 @@ CREATE TABLE IF NOT EXISTS User
             }
 
             /// <summary>
-            /// SQLを実行する
+            /// データベースにテーブルを作成する
             /// </summary>
             /// <param name="sql"></param>
-            /// <returns></returns>
-            public void ExecuteSQL(string sql)
+            /// <returns>命令を受けたレコード数</returns>
+            public int CreateTable(string sql)
             {
                 if(string.IsNullOrWhiteSpace(sql))
                 {
-                    return;
+                    return 0;
                 }
+
+                var result = 0;
+
+                try
+                {
+                    var connection_string = CreateConnectionString();
+                    using(var connection = new SQLiteConnection(connection_string))
+                    {
+                        connection.Open();
+
+                        using(var command = connection.CreateCommand())
+                        {
+                            command.CommandText = sql;
+                            result = command.ExecuteNonQuery();
+                        }
+                    }
+                }
+                catch(Exception exception)
+                {
+                    Debug.WriteLine(exception.Message);
+                }
+
+                return result;
+            }
+
+            /// <summary>
+            /// レコードを追加する
+            /// </summary>
+            /// <param name="sql"></param>
+            /// <returns>命令を受けたレコード数</returns>
+            public int Insert(string sql)
+            {
+                if(string.IsNullOrWhiteSpace(sql))
+                {
+                    return 0;
+                }
+
+                var result = 0;
 
                 var connection_string = CreateConnectionString();
                 using(var connection = new SQLiteConnection(connection_string))
                 {
                     connection.Open();
 
-                    using(var command = connection.CreateCommand())
+                    try
                     {
-                        command.CommandText = sql;
-                        command.ExecuteNonQuery();
+                        using(var transaction = connection.BeginTransaction())
+                        using(var command = connection.CreateCommand())
+                        {
+                            command.CommandText = sql;
+                            result = command.ExecuteNonQuery();
+
+                            transaction.Commit();
+                        }
+                    }
+                    catch(Exception exception)
+                    {
+                        Debug.WriteLine(exception.Message);
                     }
                 }
+
+                return result;
             }
         }
     }
