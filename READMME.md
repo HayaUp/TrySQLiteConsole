@@ -21,6 +21,19 @@
 
 `System.Data.SQLite.Core`をインストールする。
 
+### データベースファイルを作成する
+
+```cs
+// 名称、拡張子はお好みで
+SQLiteConnection.CreateFile("sample_database.db");
+
+// こちらでも作成できる
+using(var connection = new SQLiteConnection("Data Source=sample_database.db"))
+{
+    connection.Open();
+}
+```
+
 #### 参考
 
 - SQLite の NuGet パッケージ
