@@ -2,6 +2,7 @@
 using System.Data.SQLite;
 using System.IO;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace TrySQLiteConsole
 {
@@ -12,15 +13,19 @@ namespace TrySQLiteConsole
             const string DATABASE_NAME = "sample_database.db";
 
             var sample_sqlite = new SampleSQLite(DATABASE_NAME);
-            sample_sqlite.CreateDatabase(DATABASE_NAME);
+            //sample_sqlite.CreateDatabase(DATABASE_NAME);
 
-            var user = new User
-            {
-                Id = 1,
-                Name = "Alice",
-            };
+            //var user = new User
+            //{
+            //    Id = 1,
+            //    Name = "Alice",
+            //};
 
-            sample_sqlite.Insert(user.InsertSQL);
+            //sample_sqlite.Insert(user.InsertSQL);
+
+            var users = sample_sqlite.Read(User.SelectSQL);
+
+            users.ForEach(item => item.Show());
 
             Console.ReadLine();
         }
@@ -131,6 +136,49 @@ namespace TrySQLiteConsole
                 }
 
                 return result;
+            }
+
+            public List<User> Read(string sql)
+            {
+                var users = new List<User>();
+
+                if(string.IsNullOrWhiteSpace(sql))
+                {
+                    return users;
+                }
+
+                try
+                {
+                    var connection_string = CreateConnectionString();
+                    using(var connection = new SQLiteConnection(connection_string))
+                    {
+                        connection.Open();
+
+                        using(var command = connection.CreateCommand())
+                        {
+                            command.CommandText = sql;
+                            using(var reader = command.ExecuteReader())
+                            {
+                                while(reader.Read())
+                                {
+                                    var user = new User
+                                    {
+                                        Id = int.Parse(reader["Id"].ToString()),
+                                        Name = reader["Name"].ToString()
+                                    };
+
+                                    users.Add(user);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch(Exception exception)
+                {
+                    Debug.WriteLine(exception.Message);
+                }
+
+                return users;
             }
         }
     }

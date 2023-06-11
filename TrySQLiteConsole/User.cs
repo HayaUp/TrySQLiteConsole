@@ -8,6 +8,19 @@ namespace TrySQLiteConsole
 {
     public class User
     {
+        public static readonly string TABLE_NAME = "User";
+
+        public static string SelectSQL
+        {
+            get => @$"
+                SELECT
+                    {nameof(Id)},
+                    {nameof(Name)}
+                FROM
+                    {TABLE_NAME}
+                ;";
+        }
+
         public int Id;
         public string Name;
 
@@ -30,6 +43,16 @@ namespace TrySQLiteConsole
                     {Id},
                     '{Name}'
                 );";
+        }
+
+        public void Show()
+        {
+            var message = new StringBuilder()
+                .Append($"{nameof(Id)} = {Id} / ")
+                .Append($"{nameof(Name)} = {Name}")
+                .ToString();
+
+            Console.WriteLine(message);
         }
     }
 }
