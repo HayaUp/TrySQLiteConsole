@@ -50,7 +50,7 @@ namespace TrySQLiteConsole
             }
 
             // データベースファイル名だけの場合、作成場所は Debug または Release ディレクトリ内になる
-            SQLiteConnection.CreateFile(ConnectionString);
+            SQLiteConnection.CreateFile(DATABASE_NAME);
 
             return File.Exists(DATABASE_NAME);
         }
