@@ -66,3 +66,8 @@ using(var connection = new SQLiteConnection("Data Source=sample_database.db"))
 
 - 9.（追記）C#でプリペアドステートメントを使う
   - https://qiita.com/koshian2/items/63938474001c510d0b15#9%E8%BF%BD%E8%A8%98c%E3%81%A7%E3%83%97%E3%83%AA%E3%83%9A%E3%82%A2%E3%83%89%E3%82%B9%E3%83%86%E3%83%BC%E3%83%88%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E4%BD%BF%E3%81%86
+
+### レコードを更新する
+
+- データの更新(UPDATE文)
+  - https://www.javadrive.jp/sqlite/insert/index5.html
