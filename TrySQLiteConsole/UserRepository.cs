@@ -184,9 +184,28 @@ namespace TrySQLiteConsole
             return user;
         }
 
-        public void Delete()
+        /// <summary>
+        /// 指定した User を削除する
+        /// </summary>
+        /// <param name="user">削除したい User</param>
+        /// <returns>true = 削除成功, false = 削除失敗</returns>
+        public bool Delete(User user)
         {
+            if(user == null)
+            {
+                return false;
+            }
 
+            var sql = $@"
+                            DELETE FROM {TABLE_NAME}
+                            WHERE
+                                {nameof(User.Id)} = {user.Id}
+                                AND {nameof(User.Name)} = '{user.Name}'
+                        ;";
+
+            var result = Execute(sql);
+
+            return result > 0;
         }
 
         /// <summary>

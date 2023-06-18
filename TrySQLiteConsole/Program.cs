@@ -12,8 +12,8 @@ namespace TrySQLiteConsole
         {
             var user_repository = new UserRepository();
 
-            //var user = user_repository.FindById(22);
-            //user.Show();
+            var user = user_repository.FindById(22);
+            user_repository.Delete(user);
 
             var users = user_repository.Select();
             users.ForEach(user => user.Show());
