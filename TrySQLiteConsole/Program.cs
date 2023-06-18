@@ -12,10 +12,11 @@ namespace TrySQLiteConsole
         {
             var user_repository = new UserRepository();
 
-            user_repository.Update(new User { Id = 22, Name = "UpdatePerson"});
+            //var user = user_repository.FindById(22);
+            //user.Show();
 
-            var user = user_repository.FindById(22);
-            user.Show();
+            var users = user_repository.Select();
+            users.ForEach(user => user.Show());
 
             Console.ReadLine();
         }

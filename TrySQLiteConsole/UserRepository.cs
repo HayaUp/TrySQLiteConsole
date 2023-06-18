@@ -47,9 +47,17 @@ namespace TrySQLiteConsole
             }
 
             var sql = @$"
-                        INSERT INTO {TABLE_NAME} ({nameof(user.Id)}, {nameof(user.Name)})
-                        VALUES({user.Id}, '{user.Name}');
-                        ";
+                        INSERT INTO {TABLE_NAME}
+                        (
+                            {nameof(user.Id)},
+                            {nameof(user.Name)}
+                        )
+                        VALUES
+                        (
+                            {user.Id},
+                            '{user.Name}'
+                        )
+                        ;";
 
             var result = Execute(sql);
 
@@ -93,7 +101,13 @@ namespace TrySQLiteConsole
 
                     using(var command = connection.CreateCommand())
                     {
-                        command.CommandText = $"SELECT * FROM {TABLE_NAME};";
+                        command.CommandText = @$"
+                                                SELECT
+                                                    {nameof(User.Id)},
+                                                    {nameof(User.Name)}
+                                                FROM
+                                                    {TABLE_NAME}
+                                                ;";
 
                         using(var reader = command.ExecuteReader())
                         {
@@ -137,8 +151,13 @@ namespace TrySQLiteConsole
                     using(var command = connection.CreateCommand())
                     {
                         command.CommandText = @$"
-                                                SELECT * FROM {TABLE_NAME}
-                                                WHERE {nameof(User.Id)} = {id}
+                                                SELECT
+                                                    {nameof(User.Id)},
+                                                    {nameof(User.Name)}
+                                                FROM
+                                                    {TABLE_NAME}
+                                                WHERE
+                                                    {nameof(User.Id)} = {id}
                                                 ;";
 
                         using(var reader = command.ExecuteReader())
