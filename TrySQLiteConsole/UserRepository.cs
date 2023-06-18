@@ -64,6 +64,11 @@ namespace TrySQLiteConsole
             return result > 0;
         }
 
+        /// <summary>
+        /// 指定した User の更新
+        /// </summary>
+        /// <param name="user">更新したい User</param>
+        /// <returns>true = 更新成功, false = 更新失敗</returns>
         public bool Update(User user)
         {
             if(user == null)
