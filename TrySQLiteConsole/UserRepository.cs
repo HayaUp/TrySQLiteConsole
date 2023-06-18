@@ -56,9 +56,25 @@ namespace TrySQLiteConsole
             return result > 0;
         }
 
-        public void Update()
+        public bool Update(User user)
         {
+            if(user == null)
+            {
+                return false;
+            }
 
+            var sql = @$"
+                        UPDATE
+                            {TABLE_NAME}
+                        SET
+                            {nameof(User.Name)} = '{user.Name}'
+                        WHERE
+                            {nameof(User.Id)} = {user.Id}
+                        ;";
+
+            var result = Execute(sql);
+
+            return result > 0;
         }
 
         /// <summary>
