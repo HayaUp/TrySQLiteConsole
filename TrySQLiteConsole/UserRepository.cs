@@ -107,5 +107,58 @@ namespace TrySQLiteConsole
         {
 
         }
+
+        /// <summary>
+        /// ダミーデータを作成しテーブルへ挿入する
+        /// </summary>
+        public void InsertDummyData()
+        {
+            var names = new string[]
+            {
+                "Alice",
+                "Bob",
+                "Carol",
+                "Charlie",
+                "Dave",
+                "Ellen",
+                "Frank",
+                "Gari",
+                "Haiku",
+                "Issac",
+                "Ivan",
+                "Justin",
+                "Katana",
+                "Last",
+                "Mallory",
+                "Marvin",
+                "Mallet",
+                "Matilda",
+                "Ninja",
+                "Oscar",
+                "Pat",
+                "Peggy",
+                "Plod",
+                "Quantum",
+                "Ramen",
+                "Steve",
+                "Trent",
+                "Trudy",
+                "Udon",
+                "Victor",
+                "Walter",
+                "Xanadu",
+                "Yakitori",
+                "Zoe",
+            };
+
+            var users = new List<User>();
+
+            for(int i = 0; i < names.Length; i++)
+            {
+                users.Add(new User { Id = i + 1, Name = names[i] });
+            }
+
+            users.ForEach(user => Insert(user));
+        }
     }
 }
