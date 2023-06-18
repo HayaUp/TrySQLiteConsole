@@ -103,6 +103,42 @@ namespace TrySQLiteConsole
             return users;
         }
 
+        public User FindById(int id)
+        {
+            var user = new User();
+
+            try
+            {
+                using(var connection = new SQLiteConnection(ConnectionString))
+                {
+                    connection.Open();
+
+                    using(var command = connection.CreateCommand())
+                    {
+                        command.CommandText = @$"
+                                                SELECT * FROM {TABLE_NAME}
+                                                WHERE {nameof(User.Id)} = {id}
+                                                ;";
+
+                        using(var reader = command.ExecuteReader())
+                        {
+                            while(reader.Read())
+                            {
+                                user.Id = int.Parse(reader["Id"].ToString());
+                                user.Name = reader["Name"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception exception)
+            {
+                Debug.WriteLine(exception.Message);
+            }
+
+            return user;
+        }
+
         public void Delete()
         {
 

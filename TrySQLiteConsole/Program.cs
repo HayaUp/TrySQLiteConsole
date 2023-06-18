@@ -11,11 +11,8 @@ namespace TrySQLiteConsole
         static void Main(string[] args)
         {
             var user_repository = new UserRepository();
-            user_repository.CreateTable();
-            user_repository.InsertDummyData();
-
-            var users = user_repository.Select();
-            users.ForEach(user => user.Show());
+            var user = user_repository.FindById(12);
+            user.Show();
 
             Console.ReadLine();
         }
