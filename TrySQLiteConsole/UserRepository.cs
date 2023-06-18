@@ -103,6 +103,11 @@ namespace TrySQLiteConsole
             return users;
         }
 
+        /// <summary>
+        /// User の Id を指定してレコードを参照する
+        /// </summary>
+        /// <param name="id">User クラスの Id</param>
+        /// <returns>指定した Id に一致する User, 該当しなければ初期値の User</returns>
         public User FindById(int id)
         {
             var user = new User();
