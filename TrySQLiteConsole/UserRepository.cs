@@ -9,7 +9,7 @@ using System.Diagnostics;
 namespace TrySQLiteConsole
 {
     /// <summary>
-    /// User テーブルのみを扱うクラス
+    /// Users テーブルのみを扱うクラス
     /// </summary>
     public class UserRepository : RepositoryBase
     {
@@ -17,8 +17,7 @@ namespace TrySQLiteConsole
 
         public UserRepository()
         {
-            //TABLE_NAME = "Users";
-            TABLE_NAME = "User";
+            TABLE_NAME = "Users";
         }
 
         public void CreateTable()
